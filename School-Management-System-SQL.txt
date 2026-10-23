@@ -1,0 +1,160 @@
+DROP DATABASE IF EXISTS altamayoz_sis;
+-- 1. Create the central school database
+CREATE DATABASE altamayoz_sis;
+
+-- 2. Switch to the school database environment
+USE altamayoz_sis;
+
+-- 3. Create the STUDENT table with all required fields
+CREATE TABLE STUDENT(
+   ID int PRIMARY KEY AUTO_INCREMENT,
+   full_name VARCHAR(255),
+   date_of_birth DATE,
+   gender CHAR(1), -- Stores 'M' or 'F' as required by the project specifications
+   enrollment_date DATE,
+   email VARCHAR(100) UNIQUE,
+   grade_level VARCHAR(40),
+   track VARCHAR(50),
+   gpa DECIMAL(5,2) -- Configured to support cumulative GPA scales up to 100.00
+);
+
+-- 4. Create the TEACHER table to store faculty members' data
+CREATE TABLE TEACHER(
+   ID int PRIMARY KEY AUTO_INCREMENT,
+   full_name VARCHAR(255),
+   date_of_birth DATE,
+   gender CHAR(1), -- Stores 'M' or 'F' to remain consistent with student records
+   email VARCHAR(100) UNIQUE,
+   office_number VARCHAR(20)
+);
+
+-- 5. Create the COURSE table to register available school subjects
+CREATE TABLE COURSE(
+   ID int PRIMARY KEY AUTO_INCREMENT, -- Using standardized ID notation as per assignment notes
+   course_name VARCHAR(100)
+);
+
+-- 6. Display all created tables inside the database to verify their existence
+SHOW TABLES;
+
+-- 7. Insert data for at least 45 students into the STUDENT table
+use altamayoz_sis; 
+ALTER TABLE STUDENT MODIFY gpa DECIMAL(5,2);
+INSERT INTO STUDENT(full_name, date_of_birth, gender, enrollment_date, email, grade_level, track, gpa)
+VALUES
+('Yasmeen ahmad', '2006-04-22', 'F', '2019-01-21', 'yasmeenaa@gmail.com', '5', 'Scientific', 99.90),
+('Ahmed Al-Mansour', '2006-05-12', 'M', '2019-09-01', 'ahmed.m@gmail.com', '5', 'Scientific', 95.50),
+('Sara Al-Otaibi', '2006-08-22', 'F', '2019-09-01', 'sara.o@gmail.com', '5', 'Humanities', 91.20),
+('Khaled Al-Dossari', '2005-01-30', 'M', '2019-09-01', 'khaled.d@gmail.com', '6', 'Scientific', 88.00),
+('Fatima Al-Hassan', '2006-11-15', 'F', '2019-09-01', 'fatima.h@gmail.com', '5', 'Scientific', 97.40),
+('Fahad Al-Subaie', '2006-03-18', 'M', '2019-09-01', 'fahad.s@gmail.com', '5', 'Humanities', 84.15),
+('Layan Al-Ghamdi', '2007-02-14', 'F', '2019-09-01', 'layan.g@gmail.com', '4', 'Scientific', 99.10),
+('Abdulaziz Al-Zahrani', '2006-07-19', 'M', '2019-09-01', 'aziz.z@gmail.com', '5', 'Scientific', 76.50),
+('Reem Al-Qahtani', '2005-10-12', 'F', '2019-09-01', 'reem.q@gmail.com', '6', 'Humanities', 93.40),
+('Sultan Al-Shammari', '2006-12-30', 'M', '2019-09-01', 'sultan.sh@gmail.com', '5', 'Scientific', 89.90),
+('Mona Al-Harbi', '2006-05-20', 'F', '2019-09-01', 'mona.h@gmail.com', '5', 'Scientific', 87.50),
+('Faisal Al-Anazi', '2005-06-11', 'M', '2019-09-01', 'faisal.a@gmail.com', '6', 'Humanities', 82.00),
+('Maha Al-Malki', '2006-09-03', 'F', '2019-09-01', 'maha.m@gmail.com', '5', 'Humanities', 96.75),
+('Bandar Al-Khamis', '2006-12-07', 'M', '2019-09-01', 'bandar.k@gmail.com', '5', 'Scientific', 90.20),
+('Joud Al-Yousef', '2007-01-29', 'F', '2019-09-01', 'joud.y@gmail.com', '4', 'Scientific', 94.85),
+('Rayan Al-Saeed', '2006-04-16', 'M', '2019-09-01', 'rayan.s@gmail.com', '5', 'Scientific', 85.30),
+('Hessa Al-Muqrin', '2006-02-28', 'F', '2019-09-01', 'hessa.m@gmail.com', '5', 'Humanities', 92.30),
+('Meshari Al-Rashed', '2005-07-19', 'M', '2019-09-01', 'meshari.r@gmail.com', '6', 'Scientific', 79.15),
+('Noura Al-Faisal', '2006-10-24', 'F', '2019-09-01', 'noura.f@gmail.com', '5', 'Scientific', 98.60),
+('Turki Al-Sultan', '2006-11-13', 'M', '2019-09-01', 'turki.s@gmail.com', '5', 'Humanities', 83.50),
+('Lina Al-Jasser', '2007-05-02', 'F', '2019-09-01', 'lina.j@gmail.com', '4', 'Scientific', 95.00),
+('Rakan Al-Ghazali', '2006-08-08', 'M', '2019-09-01', 'rakan.g@gmail.com', '5', 'Humanities', 86.40),
+('Ghada Al-Salem', '2006-06-30', 'F', '2019-09-01', 'ghada.s@gmail.com', '5', 'Scientific', 88.95),
+('Saud Al-Nasser', '2005-03-21', 'M', '2019-09-01', 'saud.n@gmail.com', '6', 'Scientific', 91.20),
+('Yasmine Al-Amri', '2006-01-11', 'F', '2019-09-01', 'yasmine.a@gmail.com', '5', 'Humanities', 94.10),
+('Naif Al-Humaid', '2006-09-09', 'M', '2019-09-01', 'naif.h@gmail.com', '5', 'Scientific', 80.00),
+('Al-Anoud Al-Waleed', '2007-02-17', 'F', '2019-09-01', 'anoud.w@gmail.com', '4', 'Humanities', 89.70),
+('Waleed Al-Omer', '2006-11-22', 'M', '2019-09-01', 'waleed.o@gmail.com', '5', 'Scientific', 93.00),
+('Raghad Al-Ali', '2006-04-05', 'F', '2019-09-01', 'raghad.a@gmail.com', '5', 'Scientific', 96.40),
+('Nasser Al-Fahad', '2005-08-14', 'M', '2019-09-01', 'nasser.f@gmail.com', '6', 'Humanities', 81.80),
+('Dana Al-Saud', '2006-03-27', 'F', '2019-09-01', 'dana.s@gmail.com', '5', 'Scientific', 98.50),
+('Majed Al-Enezi', '2007-04-19', 'M', '2019-09-01', 'majed.e@gmail.com', '4', 'Scientific', 87.20),
+('Areej Al-Balawi', '2006-01-05', 'F', '2019-09-01', 'areej.b@gmail.com', '5', 'Humanities', 93.10),
+('Talal Al-Ahmadi', '2005-11-11', 'M', '2019-09-01', 'talal.a@gmail.com', '6', 'Scientific', 90.50),
+('Shahad Al-Amoudi', '2006-08-14', 'F', '2019-09-01', 'shahad.a@gmail.com', '5', 'Scientific', 95.80),
+('Bader Al-Mutairi', '2007-03-03', 'M', '2019-09-01', 'bader.m@gmail.com', '4', 'Humanities', 82.40),
+('Rawan Al-Shehri', '2006-06-25', 'F', '2019-09-01', 'rawan.sh@gmail.com', '5', 'Scientific', 91.90),
+('Waleed Al-Zamil', '2005-09-17', 'M', '2019-09-01', 'waleed.z@gmail.com', '6', 'Humanities', 86.00),
+('Amal Al-Dosari', '2006-12-01', 'F', '2019-09-01', 'amal.d@gmail.com', '5', 'Scientific', 94.30),
+('Youssef Al-Fawzan', '2007-05-18', 'M', '2019-09-01', 'youssef.f@gmail.com', '4', 'Scientific', 89.15),
+('Raghad Al-Sharif', '2006-02-09', 'F', '2019-09-01', 'raghad.sh@gmail.com', '5', 'Humanities', 96.00),
+('Ziyad Al-Qahtani', '2005-07-28', 'M', '2019-09-01', 'ziyad.q@gmail.com', '6', 'Scientific', 78.50),
+('Hana Al-Saeed', '2006-10-05', 'F', '2019-09-01', 'hana.s@gmail.com', '5', 'Scientific', 97.20),
+('Sami Al-Oteibi', '2007-01-14', 'M', '2019-09-01', 'sami.o@gmail.com', '4', 'Humanities', 81.60),
+('Mariam Al-Harthi', '2006-04-20', 'F', '2019-09-01', 'mariam.h@gmail.com', '5', 'Scientific', 92.80),
+('Thamer Al-Ruwaili', '2005-12-29', 'M', '2019-09-01', 'thamer.r@gmail.com', '6', 'Scientific', 85.40);
+
+-- 8. Insert data for at least 10 teachers into the TEACHER table
+USE altamayoz_sis;
+INSERT INTO TEACHER(full_name,date_of_birth,gender,email, office_number)
+VALUES('SARA ALI','1996-09-13','F','sara@gmail.com','Off-101'),
+('Faisal Al-Zahrani', '1981-04-12', 'M', 'faisal.teacher@gmail.com', 'Off-102'),
+('Noura Al-Sudairi', '1986-07-21', 'F', 'noura.teacher@gmail.com', 'Off-103'),
+('Mohammed Al-Ghamdi', '1979-02-15', 'M', 'mohammed.teacher@gmail.com', 'Off-104'),
+('Hessa Al-Otaibi', '1988-11-30', 'F', 'hessa.teacher@gmail.com', 'Off-105'),
+('Abdullah Al-Shehri', '1975-09-05', 'M', 'abdullah.teacher@gmail.com', 'Off-106'),
+('Mona Al-Qahtani', '1984-03-14', 'F', 'mona.teacher@gmail.com', 'Off-107'),
+('Khalid Al-Harbi', '1982-12-25', 'M', 'khalid.teacher@gmail.com', 'Off-108'),
+('Fatima Al-Dossari', '1989-05-18', 'F', 'fatima.teacher@gmail.com', 'Off-109'),
+('Saud Al-Shammari', '1977-08-09', 'M', 'saud.teacher@gmail.com', 'Off-110');
+
+select *from TEACHER;
+
+-- 9. Insert data for at least 6 courses into the COURSE table
+use altamayoz_sis;
+INSERT INTO COURSE(course_name)
+ VALUES('Mathematics'),
+('Physics'),
+('Chemistry'),
+('English Language'),
+('Arabic Literature'),
+('COMPUTER');
+
+-- 10. Display the contents of all tables in the database
+SELECT *FROM student;
+SELECT * FROM teacher;
+SELECT *FROM course;
+
+-- Display student table contents and sort rows ascendingly by student name
+use altamayoz_sis;
+select *from student ORDER BY full_name asc;
+
+-- 10. Display student table contents and alias the full_name column for better readability
+USE altamayoz_sis;
+SELECT 
+    ID, 
+    full_name AS 'Student_Name',
+    date_of_birth, 
+    gender, 
+    enrollment_date, 
+    email, 
+    grade_level, 
+    track, 
+    gpa 
+FROM STUDENT;
+
+-- 11. Update a student's email address by filtering with their specific ID
+use altamayoz_sis;
+UPDATE student  
+set email='yasmeen.new@gmail.com' 
+where ID=1;
+
+-- 12. Modify a teacher's office number using their unique identifier (ID)
+use altamayoz_sis;
+update TEACHER
+set office_number = 'Off-200' 
+where id=3;
+
+-- 13. Rename the COURSE table to SUBJECT to improve schema naming clarity
+use altamayoz_sis;
+alter table course rename to subject;
+
+
+-- 14. Verify the name change by displaying all available tables again
+use altamayoz_sis;
+show tables;
